@@ -20,6 +20,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     //        var previousCoordination =
     //        print(location.coordinate)
     
+    var speed = [Double]()
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[0]
         
@@ -32,8 +34,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         self.map.showsUserLocation = true
         
+        speed.append(location.speed * 2.23693629)
+        var sum:Double = 0.0
+        for i in 0..<speed.count{
+            sum += speed[i]
+        }
+        let avgspd = sum/Double(speed.count)
+        print(avgspd)
         lbl2.text = String(format: "%.1f", location.speed * 2.23693629) + " mph"
     }
+    
+    
     
     let manager = CLLocationManager()
     override func viewDidLoad() {
